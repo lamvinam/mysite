@@ -1,5 +1,3 @@
-
-
 {% extends "blog/base.html" %}
 {% load blog_template_tags %}
 {% load social_share %}
@@ -26,7 +24,9 @@
   <!-- share button -->
   <p>
     <!-- FB -->
-    {% post_to_facebook post.get_absolute_url "Share to Facebook" %}
+    <button class="facebook-button">
+      {% post_to_facebook post.get_absolute_url "Share to Facebook" %}
+    </button>
     <!-- email -->
     <button>
       <a href="{% url "blog:post_share" post.id %}">
