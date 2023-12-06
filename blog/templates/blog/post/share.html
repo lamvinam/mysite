@@ -1,16 +1,18 @@
 {% extends "blog/base.html" %}
+{% load bootstrap5 %}
+
 {% block title %}Share a post{% endblock %}
 {% block content %}
   {% if sent %}
     <h1>E-mail successfully sent</h1>
     <p>
       "{{ post.title }}" was successfully sent to {{ form.cleaned_data.to }}.
+      <a href="{{ post.get_absolute_url }}"> Back to the previous post </a>
     </p>
   {% else %}
     <h1>Share "{{ post.title }}" by e-mail</h1>
     <form method="post">
-      {{ form.as_p }}
-
+      <!--{{ form.as_p }}-->
       <!-- {% for field in form %}
         <div>
           {% if field.label == 'To email(s)' %}
@@ -23,11 +25,15 @@
           {% endif %}
         </div>
       {% endfor %} -->
-
       {% csrf_token %}
-      <input type="submit" value="Send e-mail">
+      {% bootstrap_form form layout="horizontal" show_label=True %}
+      <!--input type="submit" value="Send e-mail"-->
+      {% bootstrap_button "Send email" button_type="submit" button_class="btn-primary" %}
     </form>
   {% endif %}
+  <p>
+    <a href="{{ post.get_absolute_url }}"> Back to the previous post </a>
+  </p>
 {% endblock %}
 
 <!-- Issues:

@@ -1,5 +1,14 @@
 {% load blog_template_tags %}
 {% load static %}
+
+{# Load the tag library #}
+{% load bootstrap5 %}
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,9 +20,12 @@
     {% block content %}
     {% endblock %}
   </div>
-  <div id="sidebar">
+  <div id="sidebar" style="height:200%">
+
     <h2>
       <a href="{% url "blog:post_list" %}"> My blog </a>
+      <img style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;"
+           src="{% static 'images/pattrick.jpg' %}" alt="test">
     </h2>
     <p>
       This is my blog. I've written {% total_posts_tag %} posts so far.
@@ -23,9 +35,9 @@
         Subscribe to my RSS feed
       </a>
     </p>
-    <h3>Latest posts</h3>
+    <h3 style="background-color:DodgerBlue;">Latest posts</h3>
     {% latest_posts_tag 20 %}
-    <h3>Most commented posts</h3>
+    <h3 style="background-color:DodgerBlue;">Most commented posts</h3>
     {% most_commented_posts_tag %}
   </div>
 </body>

@@ -8,6 +8,7 @@ import re
 from django.views.decorators.http import require_POST
 from taggit.models import Tag
 from django.db.models import Count
+from django.urls import reverse
 
 def post_list(request, tag_slug=None):
     post_list = Post.published.all()
@@ -35,12 +36,12 @@ def post_list(request, tag_slug=None):
                    'tag': tag})
 
 
-def post_detail(request, year, month, day, post):
+def post_detail(request, year, month, day, slug):
     post = get_object_or_404(Post,
                              publish__year=year,
                              publish__month=month,
                              publish__day=day,
-                             slug=post,
+                             slug=slug,
                              status=Post.Status.PUBLISHED)
 
     # List of active comments for this post
@@ -58,6 +59,9 @@ def post_detail(request, year, month, day, post):
 
     # List of tags
     post_tags = post.tags.all()
+
+    # get absolute url (just need to call post.get_absolute_url method)
+    # absolute_url = reverse('blog:post_detail', args=[year, month, day, slug])
 
     return render(request, 'blog/post/detail.html',
                   {'post': post,
@@ -101,8 +105,10 @@ def post_share(request, post_id):
             subject = f"{cd['name']} recommends you read {post.title}"
             message = f"Read {post.title} at {post_url}\n\n" \
                       f"{cd['name']}\'s comments: {cd['comments']}"
-            send_mail(subject, message, cd['name'],
-                      re.split(r",|\s+", cd['to']))
+            sender_email = None
+            recipients_email = re.split(r"[-;,\s]\s*", cd['to'])
+            # send_mail(subject, message, sender_email, recipients_email)
+            send_mail(subject, message, sender_email, recipients_email)
             sent = True
     else:
         form = EmailPostForm()
@@ -126,3 +132,6 @@ def post_comment(request, post_id):
                   {'post': post,
                    'form': form,
                    'comment': comment})
+
+def homepage(request):
+    return render(request, 'homepage.html')

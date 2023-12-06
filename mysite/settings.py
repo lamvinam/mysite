@@ -30,16 +30,20 @@ ALLOWED_HOSTS = ['*']
 SITE_ID = 1
 # Application definition
 INSTALLED_APPS = [
+    # default
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # added
     'blog.apps.BlogConfig',
     'taggit',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'bootstrap5',
+    'django_social_share',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +135,4 @@ EMAIL_HOST_USER = 'terrylam1102@gmail.com'
 EMAIL_HOST_PASSWORD = 'nzua edon brlv cxxe'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'terrylam1102@gmail.com'
