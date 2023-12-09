@@ -27,6 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+#
 SITE_ID = 1
 # Application definition
 INSTALLED_APPS = [
@@ -44,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'bootstrap5',
     'django_social_share',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 
 MIDDLEWARE = [
@@ -136,3 +139,19 @@ EMAIL_HOST_PASSWORD = 'nzua edon brlv cxxe'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'terrylam1102@gmail.com'
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR/'media'
+
+# ckeditor settings
+# When using default file system storage, images will be uploaded
+# to “uploads” folder in your MEDIA_ROOT and urls will be created
+# against MEDIA_URL (/media/uploads/image.jpg)
+CKEDITOR_UPLOAD_PATH = 'uploads/'
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'height': 1200,
+        'width': 1200,
+    },
+}

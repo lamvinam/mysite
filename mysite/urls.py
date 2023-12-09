@@ -18,6 +18,10 @@ from django.urls import path, include
 from django.contrib.sitemaps.views import sitemap
 from blog.sitemaps import PostSitemap
 import blog.views
+from django.conf import settings
+from django.conf.urls.static import static
+#from ckeditor_uploader import views as ckeditor_views
+
 
 sitemaps = {
     'posts': PostSitemap,
@@ -27,5 +31,12 @@ urlpatterns = [
     path('blog/', include('blog.urls', namespace='blog')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
-    #path('', blog.views.homepage),
+    path('', blog.views.homepage),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
+    #path('ckeditor/upload/', ckeditor_views.upload, name='ckeditor_upload'),
+    #path('ckeditor/browse/', ckeditor_views.browse, name='ckeditor_browse'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

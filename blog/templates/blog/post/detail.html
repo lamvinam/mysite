@@ -19,7 +19,7 @@
       {% endfor %}
   </p>
   <!-- post content -->
-  {{ post.body|markdown }}
+  {{ post.body|safe }}
 
   <!-- share button -->
   <p>
