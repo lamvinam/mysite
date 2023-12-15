@@ -1,7 +1,9 @@
-/*Cotton Candy Pink #f2dadf*/ /*Alabaster elegant cream F8F4EC*/  /* #002366 royal blue */
+/*Cotton Candy Pink #f2dadf*/
+/*Alabaster elegant cream #F8F4EC*/
+/* #002366 royal blue */
 /* #bbb light grey */
 /* #18A8D8 curious blue */
-/*  #FF7F50bright coral*/
+/*  #FF7F50 bright coral*/
 /* #362B32;black plum*/
 /* #febe98 beach fuzz*/
 
@@ -32,9 +34,9 @@
 }
 /* generic links */
 a { 
-  color: #362B32;
+  color: #362B32; /* #362B32;black plum*/
   text-decoration:none;
-  font-weight:bold;
+  font-weight:normal;
 }
 a:hover {
   color: #FF7F50; /*bright coral*/
@@ -71,20 +73,32 @@ h2 {
 
 /* tags */
 .tags {
-  text-align: left;
-  font-size: 90%;
+  display: flex;
+  justify-content: flex-start;
+  align-item: flex-start;
+  flex-wrap: wrap;
+  align-content: space-between;
+  max-width: 100%;
+  font-size: 50%;
 }
 .tags a {
-  color: #18A8D8; /* curious blue */
   font-weight: lighter;
-}
-.tags a:not(:first-child) {
-  margin-right: 12px;
+  border-radius: 10px; /* Add rounded corners */
+  padding: 2px 4px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
 }
 .tags a:hover {
-  color: #FF7F50; /*bright coral*/
+  color: #18A8D8; /* curious blue */
+  background: #faf2e1
 }
+.tags a:not(:first-child) {
+  margin-left: 25px;
+}
+
 /* post list */
+#post-list section {
+  padding-bottom: 30px;
+}
 #post-list section:not(:last-child) {
     border-bottom: 1px solid rgba(117, 117, 117, 0.2);
 
@@ -98,7 +112,7 @@ h2 {
 #post-list .tags {
  margin-top: -15px;
 }
-#post-list .tags a:not(:first-child) {
+/*#post-list .tags a:not(:first-child) {
   margin-right: 12px;
 }
 
@@ -235,20 +249,12 @@ label {
 
   margin-right: 10px;
 }
-
 #sidebar .welcome-statement {
   margin-top: 30px;
   margin-bottom: 30px;
   font-size: 150%;
   font-family: "Georgia", serif;
 }
-#sidebar a {
-  color: #362B32; /*black plum*/
-}
-#sidebar a:hover {
-  color: #FF7F50;
-}
-
 #sidebar > div > h5.sidebar {
   margin-bottom: 5px;
   font-weight: bold;

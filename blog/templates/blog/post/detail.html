@@ -5,20 +5,22 @@
 {% block title %}{{ post.title }}{% endblock %}
 {% block content %}
   <!-- first heading -->
-  <h1> {{ post.title }} </h1>
+  <h1> {{ post.title }}
+    <div class="tags">
+      {% for tag in post_tags %}
+      <a href="{% url "blog:post_list_by_tag" tag.slug %}">{{ tag.name }}
+      </a>
+      {% endfor %}
+    </div>
+  </h1>
+    <!-- tags  -->
+
   <p class="date">
     Đăng ngày {{ post.publish }} --- bởi {{ post.author }}
   </p>
   <!-- post content -->
   <div class="main-paragraph">
-    <!-- tags  -->
-    <div class="tags">
-      {% for tag in post_tags %}
-      <a class="dropdown" href="{% url "blog:post_list_by_tag" tag.slug %}">{{ tag.name }}
-        <div class="dropdown-content">Tìm</div>
-      </a>
-      {% endfor %}
-    </div>
+
     {{ post.body|safe }}
   </div>
 
