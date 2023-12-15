@@ -4,7 +4,7 @@ from django.template.defaultfilters import truncatewords_html
 from django.urls import reverse_lazy
 from .models import Post
 
-
+# RSS feed code
 class LatestPostsFeed(Feed):
     title = 'My blog'
     link = reverse_lazy('blog:post_list')

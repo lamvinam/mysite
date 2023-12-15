@@ -18,7 +18,7 @@ def post_list(request, tag_slug=None):
         post_list = post_list.filter(tags__in=[tag])
     # Pagination with 3 posts per page
     # paginator is an iterable derived from post_list
-    paginator = Paginator(post_list, 3)
+    paginator = Paginator(post_list, 6)
     page_number = request.GET.get('page', 1)
     try:
         # Deliver the posts of page number derived from GET['page'].
@@ -133,5 +133,5 @@ def post_comment(request, post_id):
                    'form': form,
                    'comment': comment})
 
-def homepage(request):
-    return render(request, 'homepage.html')
+def about(request):
+    return render(request, 'blog/about.html')

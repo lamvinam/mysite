@@ -31,7 +31,7 @@ h2 {
     float:right;
     width:30%;
     padding:10px;
-    background:#efefef; 
+    background: #ffb7c5;
     height:200%;
 }
 
@@ -92,7 +92,7 @@ input[type=submit] {
     color:#666;
 }
 
-/* newly added by me */
+/* fb button */
 .facebook-button {
   display: inline-block;
   background-color: #3b5998;
@@ -109,4 +109,10 @@ input[type=submit] {
 
 .facebook-button:active {
   background-color: #4c67a1;
+}
+
+/* background */
+.site-background {
+  background-color: #ffb7c5; /* Set the background color */
+  background-size: cover; /* Specify how the background image should be sized */
 }

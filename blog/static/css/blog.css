@@ -1,99 +1,346 @@
-body { 
-    margin:0;
-    padding:0;
-    font-family:helvetica, sans-serif; 
+/*Cotton Candy Pink #f2dadf*/ /*Alabaster elegant cream F8F4EC*/  /* #002366 royal blue */
+/* #bbb light grey */
+/* #18A8D8 curious blue */
+/*  #FF7F50bright coral*/
+/* #362B32;black plum*/
+/* #febe98 beach fuzz*/
+
+/* background */
+.site-overall-properties {
+  background-color: #F8F4EC; /* Set the background color */
+  background-size: cover; /* Specify how the background image should be sized */
+  font-family: "calibri light", san-serif;
 }
 
+/* site-title */
+#site-title::before {
+  content: "Annie's House";
+  font-family: "Georgia", serif;
+  border-bottom: 1px solid #362B32;
+  font-size: 100%;
+  color: #362B32;
+}
+#site-title {
+  margin-bottom: 60px;
+}
+.site-title {
+  font-family: "Georgia", serif;
+  font-weight: normal;
+  border-bottom:1px solid #bbb;
+  font-size: 200%;
+  color: #362B32;
+}
+/* generic links */
 a { 
-    color:#00abff;
-    text-decoration:none; 
+  color: #362B32;
+  text-decoration:none;
+  font-weight:bold;
+}
+a:hover {
+  color: #FF7F50; /*bright coral*/
 }
 
-h1 { 
-    font-weight:normal;
-    border-bottom:1px solid #bbb;
-    padding:0 0 10px 0;
+/* headlines */
+h1 {
+  font-weight: bold;
+  font-size: 200%;
+  margin-bottom: 30px;
 }
-
 h2 {
-    font-weight:normal;
-    margin:30px 0 0;
+  font-weight:bold;
+  margin:23px 0 0;
+  font-size: 140%
 }
 
+/* content */
 #content { 
-    float:left;
-    width:60%;
-    padding:0 0 0 30px; 
+  position: absolute;
+  left: 0px;
+  width: 80%;
+  padding:0px 50px 0px 50px;
+}
+#content .main-paragraph {
+  text-align: justify;
+  text-justify: inter-word;
+  font-size: 120%;
+}
+.main-paragraph .paragraph-image {
+  max-width: 100%;
+  object-fit: scale-down;
 }
 
-/* sidebar */
-#sidebar { 
-    float:right;
-    width:30%;
-    padding:10px;
-    background:#efefef; 
-    height:200%;
+/* tags */
+.tags {
+  text-align: left;
+  font-size: 90%;
+}
+.tags a {
+  color: #18A8D8; /* curious blue */
+  font-weight: lighter;
+}
+.tags a:not(:first-child) {
+  margin-right: 12px;
+}
+.tags a:hover {
+  color: #FF7F50; /*bright coral*/
+}
+/* post list */
+#post-list section:not(:last-child) {
+    border-bottom: 1px solid rgba(117, 117, 117, 0.2);
+
+}
+#post-list section:last-child {
+  border-bottom: 0px;
+}
+#post-list .truncate-paragraph {
+  margin-top: -10px;
+}
+#post-list .tags {
+ margin-top: -15px;
+}
+#post-list .tags a:not(:first-child) {
+  margin-right: 12px;
 }
 
-p.date { 
-    color:#ccc;
-    font-family: georgia, serif;
-    font-size: 12px;
-    font-style: italic; 
+/* share section */
+#content #share-section {
+  display: flex;
+  justify-content: flex-end;
+  right: 50px;
+  width: 100%;
+  margin-top: 0px;
+  padding: 0 0 0 0;
+  border-bottom: 1px solid rgba(117, 117, 117, 0.2);
 }
-
-/* pagination */
-.pagination { 
-    margin:40px 0; 
-    font-weight:bold;
+#content #share-section > div {
+  margin: 10px;
 }
-
-/* forms */
-label { 
-    float:left;
-    clear:both;
-    color:#333;
-    margin-bottom:4px; 
-}
-input, textarea { 
-    clear:both;
-    float:left;
-    margin:0 0 10px;
-    background:#ededed;
-    border:0;
-    padding:6px 10px;
-    font-size:12px;
-}
-input[type=submit] {
-    font-weight:bold;
-    background:#00abff;
-    color:#fff;
-    padding:10px 20px;
-    font-size:14px;
-    text-transform:uppercase; 
-}
-.errorlist { 
-    color:#cc0033;
-    float:left;
-    clear:both;
-    padding-left:10px; 
+#content #similar-post-section {
+  margin-top: 50px;
 }
 
 /* comments */
-.comment {
-    padding:10px;
+#comment-section {
+  margin-top: 50px;
+  margin-bottom: 30px;
+  padding-top: 30px;
+  padding-left: 30px;
+  padding-bottom: 10px;
+  border-top: 1px solid rgba(117, 117, 117, 0.2);
+  background-color: #efefef;
+  opacity:0.9;
 }
-.comment:nth-child(even) {
-    background:#efefef;
+#comment-section #comment-list {
+  margin-top: 20px;
+  margin-left: 0px;
 }
-.comment .info {
-    font-weight:bold;
-    font-size:12px;
-    color:#666;
+#comment-list .comment {
+  padding: 10px;
+  background:#efefef;
+  margin-bottom: -20px;
+  padding-left: 5px;
+}
+#comment-list .comment .info {
+  margin-bottom: 0px;
+  font-weight:bold;
+  font-size:12px;
+  color:#666;
+}
+#comment-section #add-comment {
+  margin-top: 30px;
+  margin-left: 0px;
+}
+#comment-section #add-comment input {
+  width: 70%;
+  height: 30px;
+}
+#comment-section #add-comment textarea {
+  width: 70%;
+  height: 90px;
+}
+#comment-section #add-comment input[type=submit] {
+  background:#362B32;
+  border: 0px;
+  font-size:80%;
+  font-weight:bold;
+  color: white;
+  text-transform:uppercase;
+  width: 10%;
+  border-radius: 5px; /* Add rounded corners */
+  cursor: pointer; /* Show pointer cursor on hover */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* Add a subtle box shadow */
+}
+#comment-section #add-comment input[type=submit]:hover {
+  background: #4D3F47; /* Change background color on hover */
+}
+.errorlist {
+  color:#cc0033;
+  float:left;
+  clear:both;
+  padding-left:10px;
+}
+label {
+  margin-bottom:0px;
+}
+/*#share-section #share-text {
+  margin-left: 0px;
+  padding-right: 10px;
+  border-right: 1px solid #757575;
+  font-size: 100%;
+  font-style: italic;
+}*/
+
+/* old sidebar
+#sidebar {
+    float: right;
+    width: 20%;
+    height: 200%;
+    background: #ffb7c5;
+    padding: 10px;
+}
+/* new sidebar */
+#sidebar {
+  position: absolute;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 0  0 0 0;
+  width: 20%;
+  background-color: #febe98; /* #febe98 beach fuzz*/
+  color: #362B32;
+}
+#sidebar > div {
+  margin: 20px 30px;
+  text-align: left;
+  line-height: auto;
+  font-size: auto;
+  width: auto;
+}
+#sidebar img {
+  display: block;
+  object-fit: cover;
+  margin-left: auto;
+  margin-right: auto;
+  aspect-ratio: initial;
+  width: 100%;
+  border-radius: 0%;
+}
+#sidebar .social-icon-strip {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+#sidebar .social-icon-strip i {
+
+  margin-right: 10px;
 }
 
-/* newly added by me */
-.facebook-button {
+#sidebar .welcome-statement {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-size: 150%;
+  font-family: "Georgia", serif;
+}
+#sidebar a {
+  color: #362B32; /*black plum*/
+}
+#sidebar a:hover {
+  color: #FF7F50;
+}
+
+#sidebar > div > h5.sidebar {
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 110%;
+  font-style: italic;
+}
+#sidebar .fading-line {
+  background: linear-gradient(to right, transparent, #f2dadf, #f2dadf, #f2dadf, transparent);
+  height: 1px;
+  opacity: 1;
+}
+/* list */
+ul.similar-post {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-top: 10px;
+}
+li.sidebar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  margin-left: -30px;
+  font-size: 90%;
+}
+
+
+
+/* dropdown */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  margin-top: 0px;
+  padding: 0px 0px;
+  z-index: 1;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  background-color: #F8F4EC; /* elegant cream  */
+  font-family: 'calibri light', sans-serif;
+  font-weight: lighter;
+  font-size: 5px;
+  color: #FF7F50;
+  opacity: 1;
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* date */
+p.date { 
+  color:#757575;
+  font-family: "Calibri", sans-serif;
+  font-size: 90%;
+  font-style: italic;
+}
+
+/* pagination */
+.pagination {
+  margin:80px 0;
+  font-weight:bold;
+}
+.pagination .page-item.active .page-link{
+    background-color: #febe98;
+    border: 0;
+    color:white;
+}
+.pagination .page-item .page-link{
+    color: #febe98;
+}
+.pagination .page-item.prev .page-link{
+    color: #febe98;
+}
+.pagination .page-item.last .page-link{
+    color: #febe98;
+}
+
+/* buttons */
+.generic-button {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/*.facebook-button {
   display: inline-block;
   background-color: #3b5998;
   color: #fff;
@@ -109,4 +356,12 @@ input[type=submit] {
 
 .facebook-button:active {
   background-color: #4c67a1;
+}
+*/
+
+
+
+/* hidden */
+.hidden {
+  display: none;
 }

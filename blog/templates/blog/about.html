@@ -1,0 +1,13 @@
+{% extends "blog/base.html" %}
+{% load static %}
+
+{% block title %}About{% endblock %}
+{% block content %}
+  <!-- first heading -->
+  <h1> About me </h1>
+  <div class="main-paragraph">
+    <img class="paragraph-image" style="width: 50%; aspect-ratio: initial;"
+         src="{% static 'images/about-me-illustration.png' %}" alt="about-me-illustration">
+  </div>
+
+{% endblock %}

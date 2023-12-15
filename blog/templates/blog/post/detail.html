@@ -1,70 +1,87 @@
 {% extends "blog/base.html" %}
 {% load blog_template_tags %}
 {% load social_share %}
-{% block title %}{{ post.title }}{% endblock %}
 
+{% block title %}{{ post.title }}{% endblock %}
 {% block content %}
-  <!-- first heading  -->
-  <h1>{{ post.title }}</h1>
+  <!-- first heading -->
+  <h1> {{ post.title }} </h1>
   <p class="date">
-    Published {{ post.publish }} by {{ post.author }}
-  </p>
-  <p class="tags">
-      Tags:
-      {% for tag in post_tags %}
-        <a href="{% url "blog:post_list_by_tag" tag.slug %}">
-          {{ tag.name }}
-        </a>
-        {% if not forloop.last %}, {% endif %}
-      {% endfor %}
+    Đăng ngày {{ post.publish }} --- bởi {{ post.author }}
   </p>
   <!-- post content -->
-  {{ post.body|safe }}
-
-  <!-- share button -->
-  <p>
-    <!-- FB -->
-    <button class="facebook-button">
-      {% post_to_facebook post.get_absolute_url "Share to Facebook" %}
-    </button>
-    <!-- email -->
-    <button>
-      <a href="{% url "blog:post_share" post.id %}">
-        Share via my email
+  <div class="main-paragraph">
+    <!-- tags  -->
+    <div class="tags">
+      {% for tag in post_tags %}
+      <a class="dropdown" href="{% url "blog:post_list_by_tag" tag.slug %}">{{ tag.name }}
+        <div class="dropdown-content">Tìm</div>
       </a>
-    </button>
-    <button>
-    {% send_email post.title "Have a look at " post.get_absolute_url "Share via your email" "button"%}
-    </button>
-  </p>
-
-  <!-- -->
-  <h2>Similar posts</h2>
-  {% for post in similar_posts %}
-    <p>
-      <a href="{{ post.get_absolute_url }}">{{ post.title }} - {{ post.publish|date:"d M Y" }}</a>
-    </p>
-  {% empty %}
-    There are no similar posts yet.
-  {% endfor %}
-  <!-- -->
-  {% with comments.count as total_comments %}
-    <h2>
-      {{ total_comments }} comment{{ total_comments|pluralize }}
-    </h2>
-  {% endwith %}
-  {% for comment in comments %}
-    <div class="comment">
-      <p class="info">
-        Comment by {{ comment.name }}
-        {{ comment.created }}
-      </p>
-      {{ comment.body|linebreaks }}
+      {% endfor %}
     </div>
-  {% empty %}
-    <p>There are no comments.</p>
-  {% endfor %}
-  {% include "blog/post/includes/comment_form.html" %}
+    {{ post.body|safe }}
+  </div>
+
+
+  <!-- share section -->
+  <div class='hidden'>   <!-- getting URL by using django-social-share tags. show weird rendered code on page so hidden -->
+    {% post_to_twitter_url post.get_absolute_url %} <!-- add var tweet_url  -->
+    {% post_to_facebook_url post.get_absolute_url %} <!-- add var facebook_url  -->
+    <!--{% post_to_telegram post.get_absolute_url %} <!-- add var telegram_url -->
+    {% post_to_whatsapp_url post.get_absolute_url %} <!-- add var whatsapp_url  -->
+    <!--{% save_to_pinterest_url post.get_absolute_url %} <!-- add var pinterest_url -->
+    {% send_email_url "" post.get_absolute_url  %} <!-- add var mailto_url -->
+  </div>
+  <div id="share-section">
+    <div><a href="{{ tweet_url }}" target="_blank">
+      <i class="fa-brands fa-x-twitter" style="color:black"></i></a></div>
+    <div><a href="{{ facebook_url }}" target="_blank">
+      <i class="fa-brands fa-facebook" style="color:#1877F2"></i></a></div>
+    <!--<div><a href="{{ telegram_url }}" target="_blank">
+      <i class="fa-brands fa-telegram" style="color:#0088CC"></i></a></div> -->
+    <div><a href="{{ whatsapp_url }}" target="_blank">
+      <i class="fa-brands fa-whatsapp" style="color:#25D366"></i></a></div>
+    <!--<div><a href="{{ pinterest_url }}" target="_blank">
+      <i class="fa-brands fa-pinterest" style="color:#E60023" ></i></a></div> -->
+    <div><a href="{{ mailto_url }}" target="_blank">
+      <i class="fa-regular fa-envelope" style="color:red"></i></a></div>
+  </div>
+
+  <!--recommended posts section -->
+  <div id="similar-post-section">
+    <h2>Bài viết gợi ý</h2>
+    {% for post in similar_posts %}
+    <ul class="similar-post">
+      <a href="{{ post.get_absolute_url }}">{{ post.title }} - {{ post.publish|date:"d M Y" }}</a>
+    </ul>
+    {% empty %}
+      Chưa có bài viết tương tự.
+    {% endfor %}
+  </div>
+  <!--comment section -->
+  <div id="comment-section">
+    {% with comments.count as total_comments %}
+    <h2 style="margin-bottom:10px;"> Danh sách comment ({{ total_comments }} comment{{ total_comments|pluralize }})
+    </h2>
+    {% endwith %}
+    <div id="comment-list">
+    {% for comment in comments %}
+      <div class="comment">
+        <p class="info">
+          Comment by {{ comment.name }}
+          {{ comment.created }}
+        </p>
+        {{ comment.body|linebreaks }}
+      </div>
+    {% empty %}
+      <p>Chưa có comment.</p>
+    {% endfor %}
+    </div>
+    <div id="add-comment">
+      {% include "blog/post/includes/comment_form.html" %}
+    </div>
+  </div>
+
 
 {% endblock %}
 

@@ -12,34 +12,68 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="UTF-8">
   <title>{% block title %}{% endblock %}</title>
-  <link href="{% static "css/blog.css" %}" rel="stylesheet">
+  <link href="{% static 'css/blog.css' %}" rel="stylesheet">
   <link rel="shortcut icon" type="image/ico" href="{% static 'images/favicon.ico' %}">
+  <script src="https://kit.fontawesome.com/d0445262b1.js" crossorigin="anonymous"></script>
 </head>
-<body>
+<body class="site-overall-properties">
+
   <div id="content">
+    <a class="site-title" href="{% url 'blog:post_list' %}">
+    <div id="site-title"></div>
+    </a>
     {% block content %}
     {% endblock %}
   </div>
-  <div id="sidebar" style="height:200%">
 
+  <!--div id="sidebar">
     <h2>
       <a href="{% url "blog:post_list" %}"> My blog </a>
-      <img style="width: 60px; height: 60px; object-fit: cover; border-radius: 50%;"
-           src="{% static 'images/pattrick.jpg' %}" alt="test">
+      <img src="{% static 'images/pattrick.jpg' %}" alt="my-avatar"
+           style="width:60px; height:60px; object-fit:cover; border-radius:50%;"
+      >
     </h2>
     <p>
       This is my blog. I've written {% total_posts_tag %} posts so far.
     </p>
-    <p>
-      <a href="{% url "blog:post_feed" %}">
-        Subscribe to my RSS feed
+
+    <h3>Latest posts</h3>
+    {% latest_posts_tag 5 %}
+    <h3>Most commented posts</h3>
+    {% most_commented_posts_tag 3 %}
+    <img src="{% static 'images/main.png' %}" atl="sidebar-pic"
+         style="
+         display:block;
+         margin-top:240%; padding:0;
+         width:100%;
+         object-fit:cover; border-radius:8px;">
+  </div-->
+
+  <div id="sidebar">
+    <div id="about-me">
+      <!-- 1st sidebar image -->
+      <img  src="{% static 'images/my-avatar.jpg' %}" alt="my-avatar">
+      <!-- Add social media icon link to LA -->
+      <div class="social-icon-strip">
+        <a href="https://www.tiktok.com/@annie.annie.ne" target="_blank"><i class="about-me-icon fa-brands fa-tiktok fa-xs"></i></a>
+        <a href="https://www.facebook.com/nguyen.lananh.0109" target="_blank"><i class="about-me-icon fa-brands fa-facebook-f fa-xs"></i></a>
+      </div>
+    </div>
+    <div class="fading-line"></div>
+
+    <div>
+      <a class="dropdown welcome-statement important-hypertext" href="{% url 'about-me' %}">Welcome to Annie's House.
+          <div class="dropdown-content">About Annie and Her Blog</div>
       </a>
-    </p>
-    <h3 style="background-color:DodgerBlue;">Latest posts</h3>
-    {% latest_posts_tag 20 %}
-    <h3 style="background-color:DodgerBlue;">Most commented posts</h3>
-    {% most_commented_posts_tag %}
+    </div>
+
+    <div><h5 class="sidebar">Bài viết mới nhất</h5>{% latest_posts_tag 5 %}</div>
+    <div><h5 class="sidebar">Nhiều lượt comment</h5>{% most_commented_posts_tag 3 %}</div>
+    <div class="fading-line"></div>
+    <div><img style="height: 370px;" src="{% static 'images/main.png' %}" atl="sidebar-pic"></div>
+
   </div>
 </body>
 </html>

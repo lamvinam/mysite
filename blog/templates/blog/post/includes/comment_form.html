@@ -1,11 +1,10 @@
 {% load bootstrap5 %}
 
-<h2>Add a new comment</h2>
+<h5>Comment về bài viết:</h5>
 <form action="{% url "blog:post_comment" post.id %}" method="post" novalidate>
   <!--{{ form.as_p }}-->
   {% csrf_token %}
   {% bootstrap_form form layout="horizontal" show_label=False %}
-  <p><input type="submit" value="Add comment"></p>
-
+  <input type="submit" value="Submit">
 </form>
 
