@@ -58,15 +58,16 @@
       <!-- Add social media icon link to LA -->
       <div class="social-icon-strip">
         <a href="https://www.tiktok.com/@annie.annie.ne" target="_blank"><i class="about-me-icon fa-brands fa-tiktok fa-xs"></i></a>
-        <a href="https://www.facebook.com/nguyen.lananh.0109" target="_blank"><i class="about-me-icon fa-brands fa-facebook-f fa-xs"></i></a>
+        <a href="https://www.facebook.com/nguyen.lananh.0109" target="_blank">
+          <i class="about-me-icon fa-brands fa-facebook-f fa-xs"></i></a>
+        <a href="{% url 'about-me' %}" target="_blank">
+          <i class="fa-regular fa-user fa-xs"></i></a>
       </div>
     </div>
     <div class="fading-line"></div>
 
-    <div>
-      <a class="dropdown welcome-statement important-hypertext" href="{% url 'about-me' %}">Welcome to Annie's House.
-          <div class="dropdown-content">About Annie and Her Blog</div>
-      </a>
+    <div class="welcome-statement">
+      Welcome to Annie's House.
     </div>
 
     <div><h5 class="sidebar">Bài viết mới nhất</h5>{% latest_posts_tag 5 %}</div>

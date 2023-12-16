@@ -9,6 +9,7 @@ from django.views.decorators.http import require_POST
 from taggit.models import Tag
 from django.db.models import Count
 from django.urls import reverse
+from pathlib import Path
 
 def post_list(request, tag_slug=None):
     post_list = Post.published.all()
@@ -134,4 +135,7 @@ def post_comment(request, post_id):
                    'comment': comment})
 
 def about(request):
-    return render(request, 'blog/about.html')
+    file_path = Path('static/text/about_paragraph.txt')
+    with open(file_path, 'r') as file:
+        file_contents = file.read()
+    return render(request, 'blog/about.html', {'about_paragraph': file_contents})
