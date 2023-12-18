@@ -119,15 +119,49 @@ h2 {
 /* share section */
 #content #share-section {
   display: flex;
-  justify-content: flex-end;
+  flex-direction: row-reverse;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: baseline;
   right: 50px;
   width: 100%;
-  margin-top: 0px;
+  margin-top: 50px;
   padding: 0 0 0 0;
   border-bottom: 1px solid rgba(117, 117, 117, 0.2);
+  border-top: 1px solid rgba(117, 117, 117, 0.2);
 }
+.left-group {
+  display: flex;
+  flex: 1;
+  width : 50px;
+  align-items: baseline;
+}
+.left-group div {
+  margin-left : 1px;
+}
+.like-button {
+  margin-left: 10px;
+  text-transform: capitalize;
+  color: #Fe2c54;
+  font-weight: bold;
+}
+.total {
+  color: #Fe2c54;
+  font-weight: bold;
+}
+.right-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  flex: 1;
+  padding-top: -10px;
+}
+.right-group div {
+  margin-left : 10px;
+}
+
 #content #share-section > div {
-  margin: 10px;
+  margin: 0px;
 }
 #content #similar-post-section {
   margin-top: 50px;
@@ -368,9 +402,8 @@ p.date {
 }
 */
 
-
-
 /* hidden */
 .hidden {
   display: none;
 }
+

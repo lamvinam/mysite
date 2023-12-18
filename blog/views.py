@@ -1,15 +1,16 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Post
+from .models import Post, Ip
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
 from .forms import EmailPostForm, CommentForm
 from django.core.mail import send_mail
 import re
-from django.views.decorators.http import require_POST
 from taggit.models import Tag
 from django.db.models import Count
 from django.urls import reverse
 from pathlib import Path
+from django.views.decorators.http import require_POST
+from django.http import JsonResponse
 
 def post_list(request, tag_slug=None):
     post_list = Post.published.all()
@@ -38,6 +39,14 @@ def post_list(request, tag_slug=None):
 
 
 def post_detail(request, year, month, day, slug):
+
+    raw_ip = request.META.get('HTTP_X_FORWARDED_FOR')
+    if raw_ip is not None:
+        ip = raw_ip.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+
+
     post = get_object_or_404(Post,
                              publish__year=year,
                              publish__month=month,
@@ -69,7 +78,8 @@ def post_detail(request, year, month, day, slug):
                    'comments': comments,
                    'form': form,
                    'similar_posts': similar_posts,
-                   'post_tags': post_tags})
+                   'post_tags': post_tags,
+                   'ip': ip})
 
 
 # class PostListView(ListView):
@@ -139,3 +149,34 @@ def about(request):
     with open(file_path, 'r') as file:
         file_contents = file.read()
     return render(request, 'blog/about.html', {'about_paragraph': file_contents})
+
+
+@require_POST
+def post_like(request):
+
+    raw_ip = request.META.get('HTTP_X_FORWARDED_FOR')
+    if raw_ip is not None:
+        ip = raw_ip.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+
+
+    post_id = request.POST.get('id')
+    action = request.POST.get('action')
+    if post_id and action:
+        try:
+            post = Post.objects.get(id=post_id)
+            if action == 'like':
+                current_ip = Ip.objects.create(ip=ip, post_id=post.id)
+                post.ip_like.add(current_ip)
+                post.save()
+            else:
+                current_ip = post.ip_like.get(post_id=post.id)
+                post.ip_like.remove(current_ip)
+                current_ip.delete()
+
+            return JsonResponse({'status': 'ok'})
+        except Post.DoesNotExist:
+            pass
+
+    return JsonResponse({'status': 'error'})

@@ -35,18 +35,38 @@
     {% send_email_url "" post.get_absolute_url  %} <!-- add var mailto_url -->
   </div>
   <div id="share-section">
-    <div><a href="{{ tweet_url }}" target="_blank">
-      <i class="fa-brands fa-x-twitter" style="color:black"></i></a></div>
-    <div><a href="{{ facebook_url }}" target="_blank">
-      <i class="fa-brands fa-facebook" style="color:#1877F2"></i></a></div>
-    <!--<div><a href="{{ telegram_url }}" target="_blank">
-      <i class="fa-brands fa-telegram" style="color:#0088CC"></i></a></div> -->
-    <div><a href="{{ whatsapp_url }}" target="_blank">
-      <i class="fa-brands fa-whatsapp" style="color:#25D366"></i></a></div>
-    <!--<div><a href="{{ pinterest_url }}" target="_blank">
-      <i class="fa-brands fa-pinterest" style="color:#E60023" ></i></a></div> -->
-    <div><a href="{{ mailto_url }}" target="_blank">
-      <i class="fa-regular fa-envelope" style="color:red"></i></a></div>
+    <div class="right-group">
+      <div><a href="{{ tweet_url }}" target="_blank">
+        <i class="fa-brands fa-x-twitter" style="color:black"></i></a></div>
+      <div><a href="{{ facebook_url }}" target="_blank">
+        <i class="fa-brands fa-facebook" style="color:#1877F2"></i></a></div>
+      <!--<div><a href="{{ telegram_url }}" target="_blank">
+        <i class="fa-brands fa-telegram" style="color:#0088CC"></i></a></div> -->
+      <div><a href="{{ whatsapp_url }}" target="_blank">
+        <i class="fa-brands fa-whatsapp" style="color:#25D366"></i></a></div>
+      <!--<div><a href="{{ pinterest_url }}" target="_blank">
+        <i class="fa-brands fa-pinterest" style="color:#E60023" ></i></a></div> -->
+      <div><a href="{{ mailto_url }}" target="_blank">
+        <i class="fa-regular fa-envelope" style="color:red"></i></a></div>
+    </div>
+    <div class="left-group">
+      <div>
+      {% with total_likes=post.ip_like.count ips_like=post.ip_like.all %}
+        <span class="count">
+          <span class="total">{{ total_likes }}</span>
+        </span>
+        <a href="#" data-id="{{ post.id }}" data-action="{% if ip in ips_like %}un{% endif %}like"
+      class="like like-button">
+          {% if ip not in ips_like %}
+            Like
+          {% else %}
+            Unlike
+          {% endif %}
+        </a>
+      {% endwith %}
+      </div>
+      <div><i class="fa-solid fa-heart" style="color: #Fe2c54"'"></i></div>
+    </div>
   </div>
 
   <!--recommended posts section -->
@@ -84,6 +104,41 @@
     </div>
   </div>
 
+{% endblock %}
 
+{% block domready %}
+  var url = '{% url "blog:post_like" %}';
+  var options = {
+    method: 'POST',
+    headers: {'X-CSRFToken': csrftoken},
+    mode: 'same-origin'
+  }
+  document.querySelector('a.like')
+          .addEventListener('click', function(e){
+    e.preventDefault();
+    var likeButton = this;
+    // add request body
+    var formData = new FormData();
+    formData.append('id', likeButton.dataset.id);
+    formData.append('action', likeButton.dataset.action);
+    options['body'] = formData;
+    // send HTTP request
+    fetch(url, options)
+    .then(response => response.json())
+    .then(data => {
+      if (data['status'] === 'ok')
+      {
+        var previousAction = likeButton.dataset.action;
+        // toggle button text and data-action
+        var action = previousAction === 'like' ? 'unlike' : 'like';
+        likeButton.dataset.action = action;
+        likeButton.innerHTML = action;
+        // update like count
+        var likeCount = document.querySelector('span.count .total');
+        var totalLikes = parseInt(likeCount.innerHTML);
+        likeCount.innerHTML = previousAction === 'like' ? totalLikes + 1 : totalLikes - 1;
+      }
+    })
+  });
 {% endblock %}
 

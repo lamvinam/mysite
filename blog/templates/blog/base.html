@@ -76,5 +76,16 @@
     <div><img style="height: 370px;" src="{% static 'images/main.png' %}" atl="sidebar-pic"></div>
 
   </div>
+  <script src="//cdn.jsdelivr.net/npm/js-cookie@3.0.1/dist/js.cookie.min.js"></script>
+  <script>
+    const csrftoken = Cookies.get('csrftoken');
+    document.addEventListener('DOMContentLoaded', (event) =>
+                              {
+                                // DOM loaded
+                                {% block domready %}
+                                {% endblock %}
+                              }
+                             )
+  </script>
 </body>
 </html>

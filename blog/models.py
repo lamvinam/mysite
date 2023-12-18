@@ -10,6 +10,17 @@ class PublishedManager(models.Manager):
         return super().get_queryset()\
                       .filter(status=Post.Status.PUBLISHED)
 
+class Ip(models.Model):
+    post_id = models.IntegerField()
+    ip = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.ip
+
+    class Meta:
+        verbose_name = 'IP'
+        verbose_name_plural = 'IP'
+
 
 class Post(models.Model):
     class Status(models.TextChoices):
@@ -39,6 +50,9 @@ class Post(models.Model):
 
     # images
     photo = models.ImageField(upload_to='post_images/%Y/%m/%d/', blank=True)
+
+    # ip like
+    ip_like = models.ManyToManyField(Ip)
 
     class Meta:
         ordering = ['-publish']
@@ -73,3 +87,6 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'Comment by {self.name} on {self.post}'
+
+
+
