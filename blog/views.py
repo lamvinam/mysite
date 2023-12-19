@@ -11,6 +11,7 @@ from django.urls import reverse
 from pathlib import Path
 from django.views.decorators.http import require_POST
 from django.http import JsonResponse
+from .utilities import get_ip
 
 def post_list(request, tag_slug=None):
     post_list = Post.published.all()
@@ -39,14 +40,9 @@ def post_list(request, tag_slug=None):
 
 
 def post_detail(request, year, month, day, slug):
-
-    raw_ip = request.META.get('HTTP_X_FORWARDED_FOR')
-    if raw_ip is not None:
-        ip = raw_ip.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-
-
+    # Return ip
+    ip = get_ip(request)
+    #
     post = get_object_or_404(Post,
                              publish__year=year,
                              publish__month=month,
@@ -153,13 +149,8 @@ def about(request):
 
 @require_POST
 def post_like(request):
-
-    raw_ip = request.META.get('HTTP_X_FORWARDED_FOR')
-    if raw_ip is not None:
-        ip = raw_ip.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-
+    # Return ip
+    ip = get_ip(request)
 
     post_id = request.POST.get('id')
     action = request.POST.get('action')
