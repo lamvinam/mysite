@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from .ect import sk
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-ny&aluu&654(6lo=k61me@#e@^t)@j1k0t$5jt3m#q5ot7e)w0'
+SECRET_KEY = sk
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['127.0.0.1', 'annielan.pythonanywhere.com']
 
 #
 SITE_ID = 1
@@ -155,3 +156,6 @@ CKEDITOR_CONFIGS = {
         'width': 1200,
     },
 }
+
+ADMINS = [("Lam Vi Nam", "terrylam1102@gmail.com")]
+MANAGERS = [("Lam Vi Nam", "terrylam1102@gmail.com")]

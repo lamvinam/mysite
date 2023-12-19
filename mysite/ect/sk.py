@@ -1,0 +1,1 @@
+sk = 'django-insecure-ny&aluu&654(6lo=k61me@#e@^t)@j1k0t$5jt3m#q5ot7e)w0'

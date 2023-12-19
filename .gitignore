@@ -56,7 +56,7 @@ cover/
 *.pot
 
 # Django stuff:
-
+*.sqlite3
 
 # Flask stuff:
 instance/
