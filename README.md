@@ -1,1 +1,1 @@
-Simple Djano web app - python learning project
+Simple Django web app - python learning project
